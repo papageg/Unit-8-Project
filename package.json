@@ -19,9 +19,11 @@
   "homepage": "https://github.com/papageg/Unit-8-Project#readme",
   "dependencies": {
     "express": "^4.16.4",
+    "node": "^12.2.0",
     "pug": "^2.0.3",
     "sequelize": "^5.8.5",
     "sequelize-cli": "^5.4.0",
-    "sqlite3": "^4.0.6"
+    "sqlite3": "^4.0.7",
+    "windows-build-tools": "^5.1.0"
   }
 }
