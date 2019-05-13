@@ -6,7 +6,6 @@ var books = require('./routes/books');
 var routes = require('./routes/index');
 var app = express();
 
-var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
