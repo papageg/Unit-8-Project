@@ -7,11 +7,12 @@ var Book = require("../models").Book;
 //   });
 
   router.get('/', function(req, res, next) {
-    Book.findAll().then(function(books){
-      res.render("books/index", {books: books, title: "Welcome Home!" });
-    }).catch(function(err) {
-      res.sendStatus(500);
-    });  
+    // Book.findAll().then(function(books){
+      res.render("index", {Books: books, title: "Welcome Home!" });
+    // })
+    // .catch(function(err) {
+    //   res.sendStatus(500);
+    // });  
   });
 
   router.get('/books', (req, res, next) => {
