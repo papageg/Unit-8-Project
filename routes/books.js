@@ -1,38 +1,46 @@
 var express = require('express');
-var app = express.Router();
+var router = express.Router();
 var Book = require("../models").Book;
 
-app.get('/', (req, res, next) => {
-    res.send('Welcome Home');
+// router.get('/', (req, res, next) => {
+//     res.send('Welcome Home');
+//   });
+
+  router.get('/', function(req, res, next) {
+    Book.findAll().then(function(books){
+      res.render("books/index", {books: books, title: "Welcome Home!" });
+    }).catch(function(err) {
+      res.sendStatus(500);
+    });  
   });
 
-  app.get('/books', (req, res, next) => {
+  router.get('/books', (req, res, next) => {
     res.send('Create a New Book');
   });
 
-  app.get('/books/new', (req, res, next) => {
+  router.get('/books/new', (req, res, next) => {
     res.send('New Book Form');
   });
 
-  app.post('/books/new', (req, res, next) => {
+  router.post('/books/new', (req, res, next) => {
     Book.create(req.body).then(function(book) {
       res.redirect("/book/" + book.id);
     });
   });
 
-  app.get('/books/:id', (req, res, next) => {
+  router.get('/books/:id', (req, res, next) => {
     res.send('Book Detail Form');
   });
 
-//   app.post('/books/:id', (req, res, next) => {
+//   router.post('/books/:id', (req, res, next) => {
 //     res.send('Update book info in database');
 //   });
 
-//   app.post('/books/:id'/delete (req, res, next) => {
+//   router.post('/books/:id'/delete (req, res, next) => {
 //     res.send('Deleted Book');
 //   });
 
-module.exports = app;
+module.exports = router;
 
 
 // get / - Home route should redirect to the /books route.
