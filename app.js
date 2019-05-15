@@ -25,6 +25,9 @@ app.use(function(req, res, next) {
 //   routes.get('/books', (req, res, next) => {
 //     res.send('Create a New Book');
 //   });
+    ////////////////////////////////////////////////////////
+    //SHOULD I PUT MY ROUTES HERE???????
+    ///////////////////////////////////////////////////////
 
   if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
