@@ -6,14 +6,14 @@ var Book = require("../models").Book;
 //     res.send('Welcome Home');
 //   });
 
-  router.get('/', function(req, res, next) {
-    // Book.findAll().then(function(books){
-      res.render("index", {Books: books, title: "Welcome Home!" });
-    // })
-    // .catch(function(err) {
-    //   res.sendStatus(500);
-    // });  
-  });
+  // router.get('/', function(req, res, next) {
+  //   // Book.findAll().then(function(books){
+  //     res.render("index", {Books: books, title: "Welcome Home!" });
+  //   // })
+  //   // .catch(function(err) {
+  //   //   res.sendStatus(500);
+  //   // });  
+  // });
 
   router.get('/books', (req, res, next) => {
     res.send('Create a New Book');

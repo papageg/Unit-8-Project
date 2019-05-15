@@ -1,11 +1,12 @@
 var express = require('express');
 var path = require('path');
+var sequelize = require('sequelize');
 
 
 var books = require('./routes/books');
 var routes = require('./routes/index');
 var app = express();
-
+var port = process.env.PORT || 3000;
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -20,6 +21,10 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
   });
+
+//   routes.get('/books', (req, res, next) => {
+//     res.send('Create a New Book');
+//   });
 
   if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
@@ -41,7 +46,9 @@ app.use(function(req, res, next) {
     });
   });
 
-app.listen(3000);
+//   sequelize.sync({force: true}).then(() => {
+      app.listen(port)
+    // });
 
 module.exports = app;
 
