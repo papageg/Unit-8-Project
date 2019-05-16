@@ -13,9 +13,13 @@ module.exports = (sequelize, DataTypes) => {
     genre: DataTypes.STRING,
     year: DataTypes.INTEGER
   });
-  // , {});
-  // Book.associate = function(models) {
-  //   // associations can be defined here
+
+  // Book.prototype.publishedAt = function () {
+  //   return dateFormat(this.createdAt, "dddd, mmmm dS, yyyy, h:MM TT");
+  // };
+  
+  // Book.prototype.shortDescription = function (){ 
+  //   return this.body.length > 30 ? this.body.substr(0, 30) + "..." : this.body;
   // };
   return Book;
 };

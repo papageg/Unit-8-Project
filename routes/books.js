@@ -15,23 +15,29 @@ var Book = require("../models").Book;
     });  
   });
 
-  // router.get('/books', (req, res, next) => {
-  //   res.send('Create a New Book');
-  // });
-
-  // router.get('/books/new', (req, res, next) => {
-  //   res.send('hi');
-  // });
-////////////////////////////////
   router.get('/new', function(req, res, next) {
     res.render("new-book", {Book: Book.build(), title: "New Book"});
   });
-////////////////////////
+
   router.post('/books/new', (req, res, next) => {
     Book.create(req.body).then(function(book) {
-      res.redirect("/book/" + book.id);
-    });
+      res.redirect('/books/' + book.id);
+    }).catch(function(err) {
+      if(err.name === "SequelizeValidationError") { 
+        res.render("new-book", {
+          book: Book.build(req.body), //adds already entered info
+          title: "New Book",
+          errors: err.errors //errors array in err, gets added in new --> error view. Before empty so not there
+        });
+      } else {
+        throw err; //handled by the final catch
+      }
+    }).catch(function(err) {
+      res.render("error", { error: err });
+      console.log(err);
+    }) 
   });
+
 
   router.get('/books/:id', (req, res, next) => {
     res.send('Book Detail Form');
