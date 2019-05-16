@@ -6,23 +6,27 @@ var Book = require("../models").Book;
 //     res.send('Welcome Home');
 //   });
 
-  // router.get('/', function(req, res, next) {
-  //   // Book.findAll().then(function(books){
-  //     res.render("index", {Books: books, title: "Welcome Home!" });
-  //   // })
-  //   // .catch(function(err) {
-  //   //   res.sendStatus(500);
-  //   // });  
+  router.get('/', function(req, res, next) {
+    Book.findAll().then(function(books){
+      res.render("index", {Books: books, title: "Books" });
+    })
+    .catch(function(err) {
+      res.sendStatus(500);
+    });  
+  });
+
+  // router.get('/books', (req, res, next) => {
+  //   res.send('Create a New Book');
   // });
 
-  router.get('/books', (req, res, next) => {
-    res.send('Create a New Book');
+  // router.get('/books/new', (req, res, next) => {
+  //   res.send('hi');
+  // });
+////////////////////////////////
+  router.get('/new', function(req, res, next) {
+    res.render("new-book", {Book: Book.build(), title: "New Book"});
   });
-
-  router.get('/books/new', (req, res, next) => {
-    res.send('New Book Form');
-  });
-
+////////////////////////
   router.post('/books/new', (req, res, next) => {
     Book.create(req.body).then(function(book) {
       res.redirect("/book/" + book.id);

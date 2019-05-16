@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var sequelize = require('sequelize');
+var {sequelize} = require('./models');
 
 
 var books = require('./routes/books');
@@ -22,12 +22,6 @@ app.use(function(req, res, next) {
     next(err);
   });
 
-//   routes.get('/books', (req, res, next) => {
-//     res.send('Create a New Book');
-//   });
-    ////////////////////////////////////////////////////////
-    //SHOULD I PUT MY ROUTES HERE???????
-    ///////////////////////////////////////////////////////
 
   if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
@@ -49,9 +43,9 @@ app.use(function(req, res, next) {
     });
   });
 
-//   sequelize.sync({force: true}).then(() => {
+  sequelize.sync().then(() => {
       app.listen(port)
-    // });
+    });
 
 module.exports = app;
 
