@@ -2,9 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Book = require("../models").Book;
 
-// router.get('/', (req, res, next) => {
-//     res.send('Welcome Home');
-//   });
 
   router.get('/', function(req, res, next) {
     Book.findAll().then(function(books){
@@ -16,10 +13,11 @@ var Book = require("../models").Book;
   });
 
   router.get('/new', function(req, res, next) {
-    res.render("new-book", {Book: Book.build(), title: "New Book"});
+    res.render("new-book", {Books: Book.build(), title: "New Book"});
   });
 
-  router.post('/books/new', (req, res, next) => {
+
+  router.post('/new', (req, res, next) => {
     Book.create(req.body).then(function(book) {
       res.redirect('/books/' + book.id);
     }).catch(function(err) {
