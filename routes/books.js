@@ -36,9 +36,14 @@ var Book = require("../models").Book;
     }) 
   });
 
+  router.post('/books', (req, res, next) => {
+    res.render("update-book", {book:book, title: book.title});
+  });
 
-  router.get('/books/:id', (req, res, next) => {
-    res.send('Book Detail Form');
+  router.get('/:id', (req, res, next) => {
+    Book.findByPk(req.params.id).then(function(book) {
+      res.render("update-book", {book:book, title: book.title});
+    });
   });
 
 //   router.post('/books/:id', (req, res, next) => {
