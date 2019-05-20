@@ -13,7 +13,9 @@ var Book = require("../models").Book;
   });
 
   router.get('/new', function(req, res, next) {
-    res.render("new-book", {Books: Book.build(), title: "New Book"});
+    Book.findByPk(req.params.id).then(function(book) {
+      res.render("new-book", {Book: book, title: "New Book"});
+    });
   });
 
 
@@ -51,7 +53,7 @@ var Book = require("../models").Book;
 
   router.get('/:id', (req, res, next) => {
     Book.findByPk(req.params.id).then(function(book) {
-      res.render("articles/book", {book:book, title: book.title});
+      res.render("articles/update-book", {book:book, title: book.title});
     });
   });
 
