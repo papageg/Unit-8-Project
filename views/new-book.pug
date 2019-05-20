@@ -2,7 +2,7 @@ extends layout
 
 block content
     h1 New Book
-    form(method='post')
+    form(action="books/:id", method='post')
       p
         label(for='title') Title
         input#title(name='title', type='text')

@@ -5,7 +5,7 @@ var Book = require("../models").Book;
 
   router.get('/', function(req, res, next) {
     Book.findAll().then(function(books){
-      res.render("index", {Books: books, title: "Books" });
+      res.render("index", {books: books, title: "Books" });
     })
     .catch(function(err) {
       res.sendStatus(500);
@@ -43,11 +43,11 @@ var Book = require("../models").Book;
     
   });
 
-  router.post('/books', function(req, res, next) {
-    Book.create(req.body).then(function(book) {
-      res.redirect("/books/" + book.id);
-    });
-  });
+  // router.post('/books', function(req, res, next) {
+  //   Book.create(req.body).then(function(book) {
+  //     res.redirect("/books/" + book.id);
+  //   });
+  // });
 
   router.get('/:id', (req, res, next) => {
     Book.findByPk(req.params.id).then(function(book) {
@@ -59,9 +59,9 @@ var Book = require("../models").Book;
 //     res.send('Update book info in database');
 //   });
 
-//   router.post('/books/:id'/delete (req, res, next) => {
-//     res.send('Deleted Book');
-//   });
+  // router.post('/books/:id/delete', (req, res, next) => {
+  //   res.send('Deleted Book');
+  // });
 
 module.exports = router;
 

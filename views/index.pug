@@ -102,3 +102,10 @@ block content
             td Stephen Hawking
             td Non Fiction
             td 2001
+            each book in books
+                tr
+                td 
+                    a(href = "/books/" + book.id)= book.title
+                td= book.author
+                td= book.genre
+                td= book.year
