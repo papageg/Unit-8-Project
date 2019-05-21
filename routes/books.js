@@ -1,7 +1,9 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var router = express.Router();
 var Book = require("../models").Book;
 
+  router.use(bodyParser());
 
   router.get('/', function(req, res, next) {
     Book.findAll().then(function(books){
@@ -52,9 +54,8 @@ var Book = require("../models").Book;
   // });
 
   router.get('/:id', (req, res, next) => {
-    Book.findByPk(req.params.id).then(function(book) {
-      res.render("articles/update-book", {book:book, title: book.title});
-    });
+      // res.render("articles/update-book", {book:book.id, title: book.title});
+      res.send("BRUH");
   });
 
 //   router.post('/books/:id', (req, res, next) => {
