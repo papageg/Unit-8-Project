@@ -54,8 +54,10 @@ var Book = require("../models").Book;
   // });
 
   router.get('/:id', (req, res, next) => {
-      // res.render("articles/update-book", {book:book.id, title: book.title});
-      res.send("BRUH");
+    Book.findAll().then(function(book) {
+      res.render("articles/update-book", {book:book.id, title: book.title});
+    });
+      // res.send("book/:id");
   });
 
 //   router.post('/books/:id', (req, res, next) => {
