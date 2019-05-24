@@ -55,7 +55,7 @@ var Book = require("../models").Book;
 
   router.get('/:id', (req, res, next) => {
     Book.findAll().then(function(book) {
-      res.render("articles/update-book", {book:book.id, title: book.title});
+      res.render("../views/update-book", {book:book.id, title: book.title});
     });
       // res.send("book/:id");
   });
