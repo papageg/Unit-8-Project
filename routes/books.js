@@ -54,15 +54,18 @@ var Book = require("../models").Book;
   // });
 
   router.get('/:id', (req, res, next) => {
-    Book.findAll().then(function(book) {
+    Book.findByPk(req.params.id).then(function(book) {
       res.render("../views/update-book", {book:book.id, title: book.title, author: book.author, year: book.year});
+    })
     });
+    //Book.findAll().then(function(book) {
+    //res.render("views/update-book", {book:book.id, title: book.title, author: book.author, year: book.year});
       // res.send("book/:id");
-  });
+  // });
 
-  router.post('/:id', (req, res, next) => {
-    res.send("../views/update-book", {book:book.id, title: book.title, author: book.author, year: book.year});
-  });
+  // router.post('/:id', (req, res, next) => {
+  //   res.send("../views/update-book", {book:book.id, title: book.title, author: book.author, year: book.year});
+  // });
 
   // router.post('/books/:id/delete', (req, res, next) => {
   //   res.send('Deleted Book');
