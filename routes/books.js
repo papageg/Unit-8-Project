@@ -16,7 +16,7 @@ var Book = require("../models").Book;
 
   router.get('/new', function(req, res, next) {
     Book.findByPk(req.params.id).then(function(book) {
-      res.render("new-book", {Book: book, title: "New Book"});
+      res.render("new-book", {book: book, title: "New Book"});
     });
   });
 
@@ -40,12 +40,12 @@ var Book = require("../models").Book;
     }) 
   });
 
-  router.get('/books', (req, res, next) => {
-    Book.findAll().then(function(books) {
-      res.render("update-book", {books:books, title: books.title});
-    })
+  // router.get('/books', (req, res, next) => {
+  //   Book.findAll().then(function(books) {
+  //     res.render("update-book", {book:book, title: book.title});
+  //   })
     
-  });
+  // });
 
   // router.post('/books', function(req, res, next) {
   //   Book.create(req.body).then(function(book) {
@@ -55,14 +55,14 @@ var Book = require("../models").Book;
 
   router.get('/:id', (req, res, next) => {
     Book.findAll().then(function(book) {
-      res.render("../views/update-book", {book:book.id, title: book.title});
+      res.render("../views/update-book", {book:book.id, title: book.title, author: book.author, year: book.year});
     });
       // res.send("book/:id");
   });
 
-//   router.post('/books/:id', (req, res, next) => {
-//     res.send('Update book info in database');
-//   });
+  router.post('/:id', (req, res, next) => {
+    res.send("../views/update-book", {book:book.id, title: book.title, author: book.author, year: book.year});
+  });
 
   // router.post('/books/:id/delete', (req, res, next) => {
   //   res.send('Deleted Book');
