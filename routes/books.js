@@ -40,32 +40,21 @@ var Book = require("../models").Book;
     }) 
   });
 
-  // router.get('/books', (req, res, next) => {
-  //   Book.findAll().then(function(books) {
-  //     res.render("update-book", {book:book, title: book.title});
-  //   })
-    
-  // });
-
-  // router.post('/books', function(req, res, next) {
-  //   Book.create(req.body).then(function(book) {
-  //     res.redirect("/books/" + book.id);
-  //   });
-  // });
 
   router.get('/:id', (req, res, next) => {
     Book.findByPk(req.params.id).then(function(book) {
-      res.render("../views/new-book", {book:book.id, title: book.title, author: book.author, genre:book.genre, year: book.year});
+      res.render("../views/update-book", {book:book.id, title: book.title, author: book.author, genre:book.genre, year: book.year});
     })
   });
-    //Book.findAll().then(function(book) {
-    //res.render("views/update-book", {book:book.id, title: book.title, author: book.author, genre:book.genre, year: book.year});
-      // res.send("book/:id");
-  // });
+    
 
-  // router.post('/:id', (req, res, next) => {
-  //   res.send("../views/update-book", {book:book.id, title: book.title, author: book.author, genre:book.genre, year: book.year});
-  // });
+  router.put('/:id', (req, res, next) => {
+    Book.findByPk(req.params.id).then(function(book) {
+      return book.update(req.body);
+    }).then(function(book){
+      res.redirect("/books/" + book.id);
+    });
+  });
 
   // router.post('/books/:id/delete', (req, res, next) => {
   //   res.send('Deleted Book');
