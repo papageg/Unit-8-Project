@@ -48,7 +48,7 @@ var Book = require("../models").Book;
   });
     
 
-  router.put('/:id', (req, res, next) => {
+  router.post('/:id', (req, res, next) => {
     Book.findByPk(req.params.id).then(function(book) {
       return book.update(req.body);
     }).then(function(book){
@@ -56,9 +56,13 @@ var Book = require("../models").Book;
     });
   });
 
-  // router.post('/books/:id/delete', (req, res, next) => {
-  //   res.send('Deleted Book');
-  // });
+  router.post('/:id/delete', (req, res, next) => {
+    Book.findByPk(req.params.id).then(function(book) {
+      return book.destroy();
+    }).then(function(book){
+      res.redirect("/books");
+    });
+  });
 
 module.exports = router;
 
