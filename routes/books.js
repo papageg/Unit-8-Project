@@ -23,7 +23,7 @@ var Book = require("../models").Book;
 
   router.post('/new', (req, res, next) => {
     Book.create(req.body).then(function(book) {
-      res.redirect('/books/' + book.id);
+      res.redirect('/books/');
     }).catch(function(err) {
       if(err.name === "SequelizeValidationError") { 
         res.render("new-book", {
@@ -65,7 +65,7 @@ var Book = require("../models").Book;
     Book.findByPk(req.params.id).then(function(book) {
       return book.update(req.body);
     }).then(function(book){
-      res.redirect("/books/" + book.id);
+      res.redirect("/books/");
     });
   });
 
