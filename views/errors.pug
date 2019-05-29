@@ -1,7 +1,17 @@
-if(errors)
-  h2.errors Ooops an error occured! 
-  h2.errors Can not find ID
-  ul.errors
-    each error in errors
-      li
-        =error.message
+doctype html
+html
+  head
+    title Page Not Found
+    link(rel='stylesheet', href='../public/stylesheets/style.css')
+  body
+    h1 Server Error
+    p Sorry! There was an unexpected error on the server.
+    p Id not found.
+
+//- if(errors)
+//-   h2.errors Ooops an error occured! 
+//-   h2.errors Can not find ID
+//-   ul.errors
+//-     each error in errors
+//-       li
+//-         =error.message
