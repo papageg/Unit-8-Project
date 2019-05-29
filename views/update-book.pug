@@ -10,10 +10,10 @@ block content
   form(action="/books/" + book, method="post")
     p
       label(for='title') Title
-      input#title(name='title', type='text', value=title)
+      input#title(name='title', type='text', value=title, required="")
     p
       label(for='author') Author
-      input#author(name='author', type='text', value=author)
+      input#author(name='author', type='text', value=author, required="")
     p
       label(for='genre') Genre
       input#genre(name='genre', type='text', value=genre)
