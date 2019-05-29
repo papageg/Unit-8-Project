@@ -65,7 +65,20 @@ var Book = require("../models").Book;
     Book.findByPk(req.params.id).then(function(book) {
       return book.update(req.body);
     }).then(function(book){
-      res.redirect("/books/");
+      res.redirect("/books");
+    }).catch(function(err) {
+      if(err.name === "SequelizeValidationError") { 
+        res.render("update-book", {
+          book: Book.build(req.body), //adds already entered info
+          title: "New Book",
+          errors: err.errors //errors array in err, gets added in new --> error view. Before empty so not there
+        });
+      } else {
+        throw err; //handled by the final catch
+      }
+    }).catch(function(err) {
+      res.render("errors", { errors: err });
+      console.log(err);
     });
   });
 
