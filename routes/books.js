@@ -16,7 +16,7 @@ var Book = require("../models").Book;
 
   router.get('/new', function(req, res, next) {
     Book.findByPk(req.params.id).then(function(book) {
-      res.render("new-book", {book: book, title: "New Book"});
+      res.render("new-book", {book: Book, title: "New Book"});
     });
   });
 
