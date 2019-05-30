@@ -74,18 +74,13 @@ var Book = require("../models").Book;
       })
     ).catch(function(err) {
       if(err.name === "SequelizeValidationError") { 
-        res.render("../views/update-book", {
-          book:book, 
-          title: title, 
-          author: author, 
-          genre:genre, 
-          year: year,
-          // book: Book.build(req.body), //adds already entered info
-          // title: "New Book",
-          // author: "Dude",
-          // genre: "Code",
-          // year: "Gaaaa",
-          // errors: err.errors //errors array in err, gets added in new --> error view. Before empty so not there
+        res.render("update-book", {
+          book: Book.build(req.body), //adds already entered info
+          title: Book.title,
+          author: Book.author,
+          genre: Book.genre,
+          year: Book.year,
+          errors: err.errors //errors array in err, gets added in new --> error view. Before empty so not there
         });
       } else {
         throw err; //handled by the final catch
