@@ -43,7 +43,8 @@ var Book = require("../models").Book;
 
   router.get('/:id', (req, res, next) => {
     Book.findByPk(req.params.id).then(function(book) {
-      res.render("../views/update-book", {book:book.id, title: book.title, author: book.author, genre:book.genre, year: book.year});
+      res.render("../views/update-book", {book:book});
+      //.id, title: book.title, author: book.author, genre:book.genre, year: book.year
     }).catch(function(err) {
       if(err.name === "SequelizeValidationError") { 
         res.render("new-book", {
