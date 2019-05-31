@@ -67,12 +67,14 @@ var Book = require("../models").Book;
       return book.update(req.body);
     }).then(function(book){
       res.redirect("/books");
-    }).then(
-      Book.findByPk(req.params.id).then(function(book) {
-        res.render("../views/update-book", {book:book.id, title: book.title, author: book.author, genre:book.genre, year: book.year});
-        //.id, title: book.title, author: book.author, genre:book.genre, year: book.year
-      })
-    ).catch(function(err) {
+     })
+     //.then(
+    //   Book.findByPk(req.params.id).then(function(book) {
+    //     res.render("../views/update-book", {book:book.id, title: book.title, author: book.author, genre:book.genre, year: book.year});
+    //     //.id, title: book.title, author: book.author, genre:book.genre, year: book.year
+    //   })
+    //)
+    .catch(function(err) {
       if(err.name === "SequelizeValidationError") { 
         res.render("update-book", {
           book: Book.build(req.body), //adds already entered info
