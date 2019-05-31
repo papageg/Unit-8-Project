@@ -47,7 +47,7 @@ var Book = require("../models").Book;
       //.id, title: book.title, author: book.author, genre:book.genre, year: book.year
     }).catch(function(err) {
       if(err.name === "SequelizeValidationError") { 
-        res.render("new-book", {
+        res.render("../views/new-book", {
           book: Book.build(req.body), //adds already entered info
           title: "New Book",
           errors: err.errors //errors array in err, gets added in new --> error view. Before empty so not there
@@ -76,8 +76,12 @@ var Book = require("../models").Book;
     //)
     .catch(function(err) {
       if(err.name === "SequelizeValidationError") { 
-        res.render("update-book", {
+        res.render("../views/update-book", {
           book: Book.build(req.body), //adds already entered info
+          title: title, 
+          author: author, 
+          genre: genre, 
+          year: year,
           errors: err.errors //errors array in err, gets added in new --> error view. Before empty so not there
         });
       } else {
