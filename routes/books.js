@@ -60,37 +60,29 @@ var Book = require("../models").Book;
       console.log(err);
     }) 
   });
-    
-
+  
+  
   router.post('/:id', (req, res, next) => {
+    const reqbody = req.body;
     Book.findByPk(req.params.id).then(function(book) {
       return book.update(req.body);
     }).then(function(book){
       res.redirect("/books");
-     })
-     //.then(
-    //   Book.findByPk(req.params.id).then(function(book) {
-    //     res.render("../views/update-book", {book:book.id, title: book.title, author: book.author, genre:book.genre, year: book.year});
-    //     //.id, title: book.title, author: book.author, genre:book.genre, year: book.year
-    //   })
-    //)
-    .catch(function(err) {
+     }).catch(function(err) {
       if(err.name === "SequelizeValidationError") { 
+        const errors = err.errors.map(error => error.message);
         res.render("../views/update-book", {
-          book: Book.build(req.body), //adds already entered info
-          title: title, 
-          author: author, 
-          genre: genre, 
-          year: year,
-          errors: err.errors //errors array in err, gets added in new --> error view. Before empty so not there
+          reqbody,
+          title: reqbody.title,
+          author: reqbody.author,
+          genre: reqbody.genre,
+          year: reqbody.year,
+          errors
         });
       } else {
-        throw err; //handled by the final catch
+        next(err);
       }
-    }).catch(function(err) {
-      res.render("errors", { errors: err });
-      console.log(err);
-    });
+    })
   });
 
   router.post('/:id/delete', (req, res, next) => {
