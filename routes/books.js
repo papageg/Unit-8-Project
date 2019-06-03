@@ -77,7 +77,7 @@ var Book = require("../models").Book;
           author: reqbody.author,
           genre: reqbody.genre,
           year: reqbody.year,
-          errors
+          errors: errors
         });
       } else {
         next(err);
