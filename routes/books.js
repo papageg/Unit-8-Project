@@ -77,10 +77,10 @@ var Book = require("../models").Book;
           author: reqbody.author,
           genre: reqbody.genre,
           year: reqbody.year,
-          errors
+          errors: errors
         });
-      } else {
-        next(err);
+      } else if (req.params.action === 'edit') {
+        return book.update(reqbody);
       }
     })
   });

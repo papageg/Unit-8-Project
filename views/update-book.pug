@@ -8,6 +8,8 @@ block content
         each error in errors
           li
             =error.message
+        li
+          =errors  
     form(action="/books/" + book, method="post")
       p
         label(for='title') Title
