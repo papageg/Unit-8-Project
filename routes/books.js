@@ -64,6 +64,8 @@ var Book = require("../models").Book;
   
   router.post('/:id', (req, res, next) => {
     const reqbody = req.body;
+    console.log(reqbody)
+
     Book.findByPk(req.params.id).then(function(book) {
       return book.update(req.body);
     }).then(function(book){
@@ -72,7 +74,7 @@ var Book = require("../models").Book;
       if(err.name === "SequelizeValidationError") { 
         const errors = err.errors.map(error => error.message);
         res.render("../views/update-book", {
-          // book: req.params.id,
+          book: req.params.id,
           title: reqbody.title,
           author: reqbody.author,
           genre: reqbody.genre,
