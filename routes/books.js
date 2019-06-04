@@ -68,19 +68,18 @@ var Book = require("../models").Book;
       return book.update(req.body);
     }).then(function(book){
       res.redirect("/books");
-     }).catch(function(err) {
+     }).catch(function(err,book) {
       if(err.name === "SequelizeValidationError") { 
         const errors = err.errors.map(error => error.message);
         res.render("../views/update-book", {
           reqbody,
+          book: Book.build(reqbody),
           title: reqbody.title,
           author: reqbody.author,
           genre: reqbody.genre,
           year: reqbody.year,
           errors: errors
         });
-      } else if (req.params.action === 'edit') {
-        return book.update(reqbody);
       }
     })
   });
