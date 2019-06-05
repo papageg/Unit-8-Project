@@ -1,8 +1,9 @@
 extends layout
-
+//If a page can not be found the following error should run and say the page is not found and give you a link to go back to the Home Page
 block content
     h1 Page Not Found
     p Sorry! We couldn't find the page you were looking for.
     br
     p
-      a.button(href='/books') Home
+      a.button(href='/books') Home 
+      //The Home button above will link you back to the main screen if a page was not found

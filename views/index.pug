@@ -11,6 +11,7 @@ block content
             th Author
             th Genre
             th Year
+            //-The thead above will display in the header of the page the rows title author genre and year
         tbody
             each book in books
                 tr
@@ -19,6 +20,7 @@ block content
                 td= book.author
                 td= book.genre
                 td= book.year
+        //-The tbody will display all the books in id order from top to bottom in the correct thead catagory
 
 
 

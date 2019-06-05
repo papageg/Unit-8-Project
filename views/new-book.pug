@@ -1,13 +1,17 @@
-extends layout
+extends layout 
+//-Above will give up the main layout display on the page
 
 block content
     h1 New Book
+    //-If any errors are detected then the error within the erros call will display any and all
     if(errors)
       h2.error There seems to be an error here.
       ul.error
         each error in errors
           li
             =error.message
+    //The form below will show when the /books/new path is chosen in the browser
+    //And it will show the title author genre and year with the cancel and create new book buttons
     form(action="/books/new", method='post')
       p
         label(for='title') Title
@@ -25,3 +29,6 @@ block content
         input(type='submit', value='Create New Book')
       p
         a.button(href='/books') Cancel
+
+         //-When the new-book.pug file is called the block content is what displays to the page
+

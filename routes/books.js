@@ -4,7 +4,9 @@ var router = express.Router();
 var Book = require("../models").Book;
 
   router.use(bodyParser());
+//Above is setting up express bodyparser book and router to be used within book.js file
 
+//Below Router.get here will generate the index.pug file and display the books when the web search is at the / address
   router.get('/', function(req, res, next) {
     Book.findAll().then(function(books){
       res.render("index", {books: books, title: "Books" });
@@ -14,13 +16,14 @@ var Book = require("../models").Book;
     });  
   });
 
+//Below router.get /new will show the new-book.pug page when /new web adress is reached and display the book creation page
   router.get('/new', function(req, res, next) {
     Book.findByPk(req.params.id).then(function(book) {
       res.render("new-book", {book: Book, title: "New Book"});
     });
   });
 
-
+//Below router.post /new will create the new book if it gets an error then it will render the newbook page again or throw an error code
   router.post('/new', (req, res, next) => {
     Book.create(req.body).then(function(book) {
       res.redirect('/books/');
@@ -40,7 +43,7 @@ var Book = require("../models").Book;
     }) 
   });
 
-
+//Below router.get /:id will generate when you are at a specific book page and give the choice to update the text feilds or throw errors
   router.get('/:id', (req, res, next) => {
     Book.findByPk(req.params.id).then(function(book) {
       res.render("../views/update-book", {book:book.id, title: book.title, author: book.author, genre:book.genre, year: book.year});
@@ -61,11 +64,9 @@ var Book = require("../models").Book;
     }) 
   });
   
-  
+//Below Router.post /:id will update the books information to the database or throw the appropriate error
   router.post('/:id', (req, res, next) => {
     const reqbody = req.body;
-    console.log(reqbody)
-
     Book.findByPk(req.params.id).then(function(book) {
       return book.update(req.body);
     }).then(function(book){
@@ -85,6 +86,7 @@ var Book = require("../models").Book;
     })
   });
 
+ //Below router.post /:id/delete will delete the book permanantly 
   router.post('/:id/delete', (req, res, next) => {
     Book.findByPk(req.params.id).then(function(book) {
       return book.destroy();
